@@ -5,7 +5,9 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cadastrador", "Cadastrador\Cadastrador.csproj", "{89756EA7-F7AE-400E-8860-E1D284A991D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compartilhado", "Compartilhado\Compartilhado.csproj", "{6280DE9B-D6C1-4A47-850B-81DBB47B6B3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Compartilhado", "Compartilhado\Compartilhado.csproj", "{6280DE9B-D6C1-4A47-850B-81DBB47B6B3B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coletor", "Coletor\Coletor.csproj", "{91D883DC-5735-4C5E-9134-B09867245D69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6280DE9B-D6C1-4A47-850B-81DBB47B6B3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6280DE9B-D6C1-4A47-850B-81DBB47B6B3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6280DE9B-D6C1-4A47-850B-81DBB47B6B3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91D883DC-5735-4C5E-9134-B09867245D69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91D883DC-5735-4C5E-9134-B09867245D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91D883DC-5735-4C5E-9134-B09867245D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91D883DC-5735-4C5E-9134-B09867245D69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
