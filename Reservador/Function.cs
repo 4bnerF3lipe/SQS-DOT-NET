@@ -50,7 +50,7 @@ public class Function
                 break;
             }
         }
- 
+
 
         if (pedido.Cancelado)
         {
@@ -59,11 +59,13 @@ public class Function
                 if (produto.Reservado)
                 {
                     await DevolverAoEstoque(produto.Id, produto.Quantidade);
+                    produto.Reservado =false;
+                    context.Logger.LogLine($"Produto devolvido ao estoque");
                 }
             }
 
             await AmazonUtil.EnviarParaFila(EnumFilasSNS.falha, pedido);
-            
+
         }
         else
         {
@@ -73,13 +75,40 @@ public class Function
 
     }
 
-    private Task DevolverAoEstoque(string id, int quantidade)
+    private async Task DevolverAoEstoque(string id, int quantidade)
     {
-        throw new NotImplementedException();
+        var request = new UpdateItemRequest
+        {
+            TableName = "estoque",
+            ReturnValues = "NONE",
+            Key = new Dictionary<string, AttributeValue>
+            {
+                {"Id", new AttributeValue{S =id } },
+            },
+            UpdateExpression = "SET Quantidade = (Quantidade + :quantidadeDoPedido)",
+            ExpressionAttributeValues = new Dictionary<string, AttributeValue>
+            { { ":quantidadeDoPedido", new AttributeValue { N = quantidade.ToString() } } }
+
+        };
+        await _amazonDynamoDBClient.UpdateItemAsync(request);
     }
 
-    private Task BaixarEstoque(string id, int quantidade)
+    private async Task BaixarEstoque(string id, int quantidade)
     {
-        throw new NotImplementedException();
+        var request = new UpdateItemRequest
+        {
+            TableName = "estoque",
+            ReturnValues = "NONE",
+            Key = new Dictionary<string, AttributeValue>
+            {
+                {"Id", new AttributeValue{S =id } },
+            },
+            UpdateExpression = "SET Quantidade = (Quantidade - :quantidadeDoPedido)",
+            ConditionExpression = "Quantidade >= :quantidadeDoPedido",
+            ExpressionAttributeValues = new Dictionary<string, AttributeValue>
+            { { ":quantidadeDoPedido", new AttributeValue { N = quantidade.ToString() } } }
+            
+        };
+        await _amazonDynamoDBClient.UpdateItemAsync(request);
     }
 }
