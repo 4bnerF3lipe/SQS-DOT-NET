@@ -14,7 +14,7 @@ namespace Coletor;
 
 public class Function
 {
-    public async void FunctionHandler(DynamoDBEvent dynamoEvent, ILambdaContext context)
+    public async Task FunctionHandler(DynamoDBEvent dynamoEvent, ILambdaContext context)
     {
 
         foreach (var record in dynamoEvent.Records)
@@ -26,20 +26,22 @@ public class Function
                 try
                 {
                     await ProcessarValorDoPedido(pedido);
+                    await AmazonUtil.EnviarParaFila(EnumFilasSQS.pedido, pedido);
+                    context.Logger.LogLine($"Sucesso na coleta do pedidio: '{pedido.Id}'");
                 }
                 catch (Exception ex)
                 {
+                    context.Logger.LogLine($"ERRO: '{ex.Message}'");
                     pedido.JustificativaDeCancelamento = ex.Message;
                     pedido.Cancelado = true;
+                    await AmazonUtil.EnviarParaFila(EnumFilasSNS.falha, pedido);
                     //Adicionar a fila de falha
 
                 }
-                pedido.SalvarAsync();
+                await pedido.SalvarAsync();
                 //salvar o pedido
             }
         }
-
-
     }
 
     private async Task ProcessarValorDoPedido(Pedido pedido)
@@ -66,8 +68,8 @@ public class Function
         var request = new QueryRequest()
         {
             TableName = "estoque",
-            KeyConditionExpression = "Ìd = :v_id",
-            ExpressionAttributeValues = new Dictionary<string, AttributeValue> { { "v_id", new AttributeValue { S = id } } }
+            KeyConditionExpression = "Id = :v_id",
+            ExpressionAttributeValues = new Dictionary<string, AttributeValue> { { ":v_id", new AttributeValue { S = id } } }
         };
         var response = await client.QueryAsync(request);
         var item = response.Items.FirstOrDefault();

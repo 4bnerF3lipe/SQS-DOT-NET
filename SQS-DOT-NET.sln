@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cadastrador", "Cadastrador\Cadastrador.csproj", "{89756EA7-F7AE-400E-8860-E1D284A991D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01_Cadastrador", "Cadastrador\01_Cadastrador.csproj", "{89756EA7-F7AE-400E-8860-E1D284A991D5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Compartilhado", "Compartilhado\Compartilhado.csproj", "{6280DE9B-D6C1-4A47-850B-81DBB47B6B3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "00_Compartilhado", "Compartilhado\00_Compartilhado.csproj", "{6280DE9B-D6C1-4A47-850B-81DBB47B6B3B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coletor", "Coletor\Coletor.csproj", "{91D883DC-5735-4C5E-9134-B09867245D69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02_Coletor", "Coletor\02_Coletor.csproj", "{91D883DC-5735-4C5E-9134-B09867245D69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
