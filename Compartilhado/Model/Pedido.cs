@@ -10,7 +10,8 @@ namespace Compartilhado.Model
     {
         Coletado,
         Pago,
-        Faturado
+        Faturado,
+        Reservado
     }
     [DynamoDBTable("Pedidos")]
     public class Pedido
